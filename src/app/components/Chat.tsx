@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Textarea } from "@/components/ui/textarea"
@@ -7,6 +8,14 @@ import { useChat } from 'ai/react';
 
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
+
+  const chatParent = useRef<HTMLUListElement>(null);
+  
+  useEffect(() => {
+    const node = chatParent.current;
+    if(node)
+        node.scrollTop = node.scrollHeight
+  })
 
   return (
     <div className="flex flex-col h-screen">
