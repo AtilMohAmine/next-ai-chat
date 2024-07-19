@@ -9,7 +9,7 @@ import { useChat } from 'ai/react';
 export default function Chat() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
 
-  const chatParent = useRef<HTMLUListElement>(null);
+  const chatParent = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
     const node = chatParent.current;
@@ -23,7 +23,7 @@ export default function Chat() {
         <h1 className="text-xl font-bold">Chat AI</h1>
       </header>
       <div className="flex-1 overflow-auto p-6">
-        <div className="space-y-4">
+        <div className="space-y-4 h-full overflow-scroll no-scrollbar" ref={chatParent}>
             
         {messages.map(m => (
             m.role === 'user' 
