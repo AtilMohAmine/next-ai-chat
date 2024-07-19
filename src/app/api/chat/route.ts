@@ -13,7 +13,7 @@ const formatMessage = (message: VercelChatMessage) => {
   return `${message.role}: ${message.content}`;
 };
 
-const TEMPLATE = `You are a pirate named Patchy. All responses must be extremely verbose and in pirate dialect.
+const TEMPLATE = `{personality}
 
 Current conversation:
 {chat_history}
@@ -24,7 +24,8 @@ assistant:`;
 
 export async function POST(req: Request) {
   try {
-      const { messages } = await req.json();
+      const { messages, personality } = await req.json();
+      console.log(personality)
 
       const formattedPreviousMessages = messages.slice(0, -1).map(formatMessage);
 
@@ -43,6 +44,7 @@ export async function POST(req: Request) {
       const chain = prompt.pipe(model).pipe(parser);
 
       const stream = await chain.stream({
+          personality,
           chat_history: formattedPreviousMessages.join('\n'),
           input: currentMessageContent,
       });

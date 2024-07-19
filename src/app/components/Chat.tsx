@@ -1,14 +1,27 @@
 'use client'
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { Textarea } from "@/components/ui/textarea"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+
 import { useChat } from 'ai/react';
 
 export default function Chat() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
-
+  const [personality, setPersonality] = useState('Standard, neutral responses.');
+  const { messages, input, handleInputChange, handleSubmit } = useChat({
+    body: {
+      personality
+    }
+  });
+  
   const chatParent = useRef<HTMLDivElement>(null);
   
   useEffect(() => {
@@ -26,8 +39,22 @@ export default function Chat() {
 
   return (
     <div className="flex flex-col h-screen">
-      <header className="bg-primary text-primary-foreground py-4 px-6 flex items-center justify-between">
-        <h1 className="text-xl font-bold">Chat AI</h1>
+      <header className="bg-primary py-4 px-6 flex items-center justify-between">
+        <h1 className="text-xl font-bold text-primary-foreground">Chat AI</h1>
+        <Select 
+          defaultValue={personality}
+          onValueChange={(value) => setPersonality(value)}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Personality" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="Standard, neutral responses.">Default</SelectItem>
+            <SelectItem value="You are a pirate named Patchy. All responses must be extremely verbose and in pirate dialect.">Pirate</SelectItem>
+            <SelectItem value="You are a stand-up comedian. Responses should be humorous and witty.">Comedian</SelectItem>
+            <SelectItem value="You are a friendly robot. Responses should be precise and mechanical.">Robot</SelectItem>
+          </SelectContent>
+        </Select>
       </header>
       <div className="flex-1 overflow-auto p-6">
         <div className="space-y-4 h-full overflow-scroll no-scrollbar" ref={chatParent}>
