@@ -17,6 +17,13 @@ export default function Chat() {
         node.scrollTop = node.scrollHeight
   })
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
+
   return (
     <div className="flex flex-col h-screen">
       <header className="bg-primary text-primary-foreground py-4 px-6 flex items-center justify-between">
@@ -55,7 +62,7 @@ export default function Chat() {
       </div>
       <form onSubmit={handleSubmit}>
         <div className="bg-background border-t px-6 py-4 flex items-center">
-            <Textarea placeholder="Type your message..." value={input} onChange={handleInputChange} className="flex-1 resize-none pr-16" />
+            <Textarea placeholder="Type your message..." value={input} onChange={handleInputChange} onKeyDown={handleKeyDown} className="flex-1 resize-none pr-16" />
             <Button type="submit" size="icon" className="ml-4">
                 <SendIcon className="w-5 h-5" />
                 <span className="sr-only">Send</span>
