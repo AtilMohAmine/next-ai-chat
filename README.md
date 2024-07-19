@@ -1,6 +1,6 @@
 # Next AI Chat
 
-A chat application built with Next.js that simulates a conversation between a user and an AI. The app features user and AI message differentiation with simple styling and leverages the OpenAI API for AI responses.
+A chat application built with Next.js that simulates a conversation between a user and an AI using LangChain. The app features multiple personality options for the AI, including Default, Pirate, Comedian, and Robot, allowing for varied and engaging interactions.
 
 <p align="center">
    <img src="https://github.com/user-attachments/assets/cbf81954-d53a-48f0-bdff-058c29cf1792" style="border-radius: 1%" width="90%">
