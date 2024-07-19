@@ -3,7 +3,7 @@
 A chat application built with Next.js that simulates a conversation between a user and an AI. The app features user and AI message differentiation with simple styling and leverages the OpenAI API for AI responses.
 
 <p align="center">
-   <img src="https://github.com/user-attachments/assets/74322dae-7e01-4c1c-9760-fde257be76a3" style="border-radius: 1%" width="50%">
+   <img src="https://github.com/user-attachments/assets/cbf81954-d53a-48f0-bdff-058c29cf1792" style="border-radius: 1%" width="90%">
 </p>
 
 ## Installation
